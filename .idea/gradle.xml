@@ -8,6 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/server-core" />
+            <option value="$PROJECT_DIR$/server-ui" />
+            <option value="$PROJECT_DIR$/tracker-core" />
+            <option value="$PROJECT_DIR$/tracker-ui" />
           </set>
         </option>
       </GradleProjectSettings>
