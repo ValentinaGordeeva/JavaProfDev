@@ -29,6 +29,38 @@ project(':server-core') {
 
     }
 }
+/*
+buildscript {
+   repositories {
+       mavenCentral()
+   }
+   dependencies {
+       classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+   }
+}*/
+project(':tracker-core') {
+    apply plugin: 'java-library-distribution'
+//   apply plugin: 'gradle-one-jar'
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        testImplementation group: 'junit', name: 'junit', version: '4.12'
+        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+        implementation project(':common')
+        implementation group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
+        implementation 'org.slf4j:slf4j-api:1.7.32'
+
+        implementation group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
+    }
+    /*
+    task fatJar(type: OneJar) {
+        mainClass = 'jdev.tracker.Main'
+    }
+
+     */
+}
 project(':server-ui') {
     apply plugin: 'java-library-distribution'
     repositories {
@@ -43,20 +75,6 @@ project(':server-ui') {
 
     }
 }
-project(':tracker-core') {
-    apply plugin: 'java-library-distribution'
-//   apply plugin: 'gradle-one-jar'
-    repositories {
-        mavenCentral()
-        mavenLocal()
-    }
-    dependencies {
-        testImplementation group: 'junit', name: 'junit', version: '4.12'
-        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-        implementation project(':common')
-    }
-
-}
 project(':tracker-ui') {
     apply plugin: 'java-library-distribution'
     repositories {
@@ -68,6 +86,6 @@ project(':tracker-ui') {
 
         implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
         implementation project(':common')
-
     }
 }
+
