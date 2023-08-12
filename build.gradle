@@ -1,5 +1,6 @@
 subprojects{
     apply plugin: 'java'
+
     repositories {
         mavenCentral()
         mavenLocal()
@@ -12,20 +13,23 @@ subprojects{
 project(':common') {
     dependencies{
         implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+
     }
 }
-
 project(':server-core') {
     apply plugin: 'java-library-distribution'
     repositories {
         mavenCentral()
-        mavenLocal()
     }
+
     dependencies {
         testImplementation group: 'junit', name: 'junit', version: '4.12'
-
         implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
         implementation project(':common')
+        implementation group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
+        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.2'
+        implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+
 
     }
 }
@@ -38,54 +42,65 @@ buildscript {
        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
    }
 }*/
-project(':tracker-core') {
-    apply plugin: 'java-library-distribution'
+    project(':tracker-core') {
+        apply plugin: 'java-library-distribution'
 //   apply plugin: 'gradle-one-jar'
-    repositories {
-        mavenCentral()
-        mavenLocal()
-    }
-    dependencies {
-        testImplementation group: 'junit', name: 'junit', version: '4.12'
-        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-        implementation project(':common')
-        implementation group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
-        implementation 'org.slf4j:slf4j-api:1.7.32'
+        repositories {
+            mavenCentral()
+            mavenLocal()
+        }
+        dependencies {
+            testImplementation group: 'junit', name: 'junit', version: '4.12'
+            implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+            implementation project(':common')
+            implementation group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
+            implementation 'org.slf4j:slf4j-api:1.7.32'
 
-        implementation group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
-    }
-    /*
+            implementation group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
+
+            implementation 'org.springframework.boot:spring-boot-starter-web:2.5.2'
+            implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.7.3'
+            implementation 'org.springframework.boot:spring-boot-devtools:2.7.11'
+            implementation 'org.springframework.boot:spring-boot-starter-tomcat:2.7.11'
+            testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.11'
+            testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+
+            implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.2'
+            implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+
+        }
+        /*
     task fatJar(type: OneJar) {
         mainClass = 'jdev.tracker.Main'
     }
 
      */
-}
-project(':server-ui') {
-    apply plugin: 'java-library-distribution'
-    repositories {
-        mavenCentral()
-        mavenLocal()
     }
-    dependencies {
-        testImplementation group: 'junit', name: 'junit', version: '4.12'
+    project(':server-ui') {
+        apply plugin: 'java-library-distribution'
+        repositories {
+            mavenCentral()
+            mavenLocal()
+        }
+        dependencies {
+            testImplementation group: 'junit', name: 'junit', version: '4.12'
 
-        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-        implementation project(':common')
+            implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+            implementation project(':common')
 
+        }
     }
-}
-project(':tracker-ui') {
-    apply plugin: 'java-library-distribution'
-    repositories {
-        mavenCentral()
-        mavenLocal()
-    }
-    dependencies {
-        testImplementation group: 'junit', name: 'junit', version: '4.12'
+    project(':tracker-ui') {
+        apply plugin: 'java-library-distribution'
+        repositories {
+            mavenCentral()
+            mavenLocal()
+        }
+        dependencies {
+            testImplementation group: 'junit', name: 'junit', version: '4.12'
 
-        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-        implementation project(':common')
+            implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+            implementation project(':common')
+        }
     }
-}
 

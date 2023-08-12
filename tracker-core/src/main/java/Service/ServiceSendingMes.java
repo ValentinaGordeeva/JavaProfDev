@@ -1,40 +1,43 @@
 package Service;
 
+import application.Coordinates;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.micromata.opengis.kml.v_2_2_0.Point;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
 
 
 @Service
+@Component
 public class ServiceSendingMes {
-
-
     @Autowired
     ServiceKeeping keeping;
+    @Autowired
+    RestTemplate restTemplate;
 
-    public void printQueueAsJson() throws InterruptedException {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public void sendCoordinates(String item) {
+        // Создаем объект с данными координат
+        Coordinates coordinates = new Coordinates();
+        coordinates.setIthem(item);
 
+        // Отправляем данные в виде jcon на адрес
+        String url = "http://localhost:8080/";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        while (!keeping.queue.isEmpty()) {
-            try {
-                String item = keeping.queue.take();
-                String json = objectMapper.writeValueAsString(item);
-                System.out.println(json);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-        }
-
+        //для отправки запроса
+        HttpEntity<Coordinates> requestEntity = new HttpEntity<>(coordinates, headers);
+        restTemplate.postForObject(url, requestEntity, String.class);
     }
+
 }
