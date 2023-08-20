@@ -33,18 +33,10 @@ project(':server-core') {
 
     }
 }
-/*
-buildscript {
-   repositories {
-       mavenCentral()
-   }
-   dependencies {
-       classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-   }
-}*/
+
     project(':tracker-core') {
         apply plugin: 'java-library-distribution'
-//   apply plugin: 'gradle-one-jar'
+
         repositories {
             mavenCentral()
             mavenLocal()
