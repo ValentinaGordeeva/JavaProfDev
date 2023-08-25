@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<link rel="stylesheet" type="text/css" href="/css/file.css">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome!</h1>
+<p>Click <a th:href="@{/payments}">here(payments)</a> or <a th:href="@{/routes}">here(routes)</a> if you are CLIENT.</p>
+<p>Click <a th:href="@{/registerClient}">here(registerClient)</a>if you are MANAGER.</p>
+<p>Click <a th:href="@{/registerManager}">here(registerManager)</a>if you are ROOT.</p>
+<img src="img/img.jpg" alt="Мое изображение" width="300" height="200">
+
+
+
+
+</body>
+</html>
