@@ -19,10 +19,12 @@ public class ConfigMvc extends WebMvcConfigurerAdapter {
         //registry.addViewController("/img/img.jpg").setViewName("/img/img.jpg");
         registry.addViewController("/login").setViewName("login");
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("classpath:/templates/img/");
 
     }
+
 }

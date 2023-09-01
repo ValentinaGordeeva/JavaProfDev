@@ -2,6 +2,7 @@ package Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -10,11 +11,14 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 @Service
+@Component
 public class ServiceKeeping {
-    private long previous;
+    public long previous;
     BlockingDeque<String> queue =  new LinkedBlockingDeque<>(100);
     @Autowired
     ServiceGPS servergps;
+    @Autowired
+    ServiceSendingMes serviceSendingMes;
     private int putCount;
 
 
@@ -28,17 +32,16 @@ public class ServiceKeeping {
    }
 
     @Scheduled (fixedDelay =4000)
-    void take() throws InterruptedException {//извлекаем  данные из очереди
+    void take() throws InterruptedException { //извлекаем  данные из очереди
         long current = System.currentTimeMillis();
+        // String item = queue.take();
         //System.out.println((current - previous) + " Очередь по расписанию " + queue.poll(500, TimeUnit.MILLISECONDS));
-        // System.out.println();
-        System.out.println((current - previous)  + queue.take());
+        serviceSendingMes.sendCoordinates(queue.take());
+
         previous = current;
 
     }
-
-
-    }
+ }
 
 
 
