@@ -1,6 +1,9 @@
 package controller;
 
 
+import jp.CoordinatRepositorySC;
+import jp.CoordinatTableSC;
+import jp.JpaApplicationSC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +24,20 @@ import classforcoordinates.Coordinates;
 public class ControllerPOST {
 
     private final Logger logger = LoggerFactory.getLogger(ControllerPOST.class);
+    @Autowired
+    private JpaApplicationSC jpaApplicationSC;
     @PostMapping("/")
-    public ResponseEntity<String> receiveCoordinates(Coordinates coordinates, Model modelMock) {
+    public ResponseEntity<String> receiveCoordinates(@RequestBody Coordinates coordinates, Model modelMock) {
         logger.info("Received coordinates: {}", coordinates);
-
         try {
+            jpaApplicationSC.run();
+            jpaApplicationSC.setCoordinates(coordinates.toString());
             //запись координат в файл
             FileOutputStream fileOutputStream = new FileOutputStream("coordinates.txt", true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, Charset.forName("UTF-8"));
             BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
-
             bufferedWriter.write(coordinates.toString());
             bufferedWriter.newLine();
-
             bufferedWriter.close();
             outputStreamWriter.close();
             fileOutputStream.close();
@@ -43,6 +47,8 @@ public class ControllerPOST {
         } catch (IOException e) {
             logger.error("Error when writing coordinates: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error when writing coordinates to a file");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }

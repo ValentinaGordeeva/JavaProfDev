@@ -1,6 +1,10 @@
+package Service;
+
 import Service.ServiceGPS;
 import Service.ServiceKeeping;
 import Service.ServiceSendingMes;
+import jp.CoordRepository;
+import jp.JpaApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
@@ -15,16 +19,17 @@ public class InjectionContext {
     public ServiceGPS  servergps() {
     return new ServiceGPS();
     }
+
     @Bean
     public ServiceKeeping keeping() {
         return new ServiceKeeping();
     }
-/* для 5 пр.р.
+
     @Bean
     public ServiceSendingMes sendmec() {
         return new ServiceSendingMes();
     }
-*/
+
     @Bean
     public TaskScheduler poolScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
@@ -32,8 +37,12 @@ public class InjectionContext {
         scheduler.setPoolSize(20);
         return scheduler;
     }
+
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
+
 }
