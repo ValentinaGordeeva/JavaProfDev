@@ -1,7 +1,9 @@
 package Service;
 
 
+import jp.JpaApplication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,24 +21,25 @@ public class ServiceSendingMes {
     @Autowired
     ServiceKeeping keeping;
 
-/*    @Autowired           раскоментировать для 5 пр.р.
+    @Autowired         //  раскоментировать для 5 пр.р.
     RestTemplate restTemplate;
+    @Autowired
+    JpaApplication jpaApplication;
 
- */
+ /*
 
-    private final RestTemplate restTemplate;
+       private final RestTemplate restTemplate;
 
-    public ServiceSendingMes(@Autowired RestTemplate restTemplate){
-        this.restTemplate=restTemplate;
-    }
-
+       public ServiceSendingMes(@Autowired RestTemplate restTemplate){
+           this.restTemplate=restTemplate;
+       }
+*/
 
     public void sendCoordinates(String item) {
         // Создаем объект с данными координат
 
         Coordinates coordinates = new Coordinates();
         coordinates.setIthem(item);
-
         // Отправляем данные в виде jcon на адрес
         String url = "http://localhost:8080/";
         HttpHeaders headers = new HttpHeaders();
@@ -45,6 +48,7 @@ public class ServiceSendingMes {
         //для отправки запроса
         HttpEntity<Coordinates> requestEntity = new HttpEntity<>(coordinates, headers);
         restTemplate.postForObject(url, requestEntity, String.class);
+        jpaApplication.setCoordinates(coordinates.toString());
     }
 
 }

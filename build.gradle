@@ -38,18 +38,22 @@ project(':server-core') {
         testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.11'
         testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
 
+        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.2'
+        implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+
+        testImplementation group: 'com.h2database', name: 'h2', version: '1.4.195'
+        implementation 'com.h2database:h2:1.4.200'
+        implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.18'
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.11'
+        implementation group: 'org.liquibase', name: 'liquibase-core', version: '2.0.5'
+        implementation 'javax.persistence:javax.persistence-api:2.2'
+
+
+
 
     }
 }
-/*
-buildscript {
-   repositories {
-       mavenCentral()
-   }
-   dependencies {
-       classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-   }
-}*/
+
     project(':tracker-core') {
         apply plugin: 'java-library-distribution'
 //   apply plugin: 'gradle-one-jar'
@@ -75,6 +79,14 @@ buildscript {
 
             implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.2'
             implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+
+            testImplementation group: 'com.h2database', name: 'h2', version: '1.4.195'
+            implementation 'com.h2database:h2:1.4.200'
+            implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.18'
+            implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.11'
+            implementation group: 'org.liquibase', name: 'liquibase-core', version: '2.0.5'
+            implementation 'javax.persistence:javax.persistence-api:2.2'
+
 
         }
         /*

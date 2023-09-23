@@ -42,7 +42,7 @@ public class ServiceGPS {
         }
     }
     //запуск по расписанию
-    @Scheduled(fixedDelay = 6000)
+    @Scheduled(fixedDelay = 16000)
     public List<String> timer() {
         readCoordinates();
         return result;
