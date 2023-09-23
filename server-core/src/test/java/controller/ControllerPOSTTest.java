@@ -16,7 +16,7 @@ class ControllerPOSTTest {
     Model modelMock;
     @InjectMocks
     ControllerPOST controller;
-/*
+
     @Test
     void receiveCoordinates() throws Exception {
         Coordinates coordinates = new Coordinates();
@@ -29,6 +29,4 @@ class ControllerPOSTTest {
         assertEquals("<200 OK OK,The coordinates are received and written to a file,[]>",result);
 
     }
-
- */
 }

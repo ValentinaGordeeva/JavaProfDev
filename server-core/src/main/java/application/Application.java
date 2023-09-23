@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@ComponentScan({"application","services", "controller","jp"})
+@ComponentScan({"application","services", "controller"})
 public class Application {
     public static void main(String [] args){
         SpringApplication.run(Application.class);

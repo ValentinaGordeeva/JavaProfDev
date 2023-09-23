@@ -13,6 +13,6 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return ithem ;
+        return "Coordinates{"+ ithem +"}";
     }
 }
