@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,13 +48,7 @@ public class JpaApplication implements CommandLineRunner {
     CoordRepository coordRepository;
     private String coordinates;
 
-    public String getCoordinates() {
-        return coordinates;
-    }
 
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
-    }
 
  public String processString(String ithe){
      return  ithe;
@@ -61,7 +57,14 @@ public class JpaApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         read();
-        CoordinatesTable  model = create(getCoordinates());
+        List<String> lines = Files.readAllLines(Paths.get("data.txt"));
+        for (String line : lines) {
+
+            CoordinatesTable model = create(line);
+        }
+        log.info("=========== after create");
+        read();
+
         log.info("=========== after create");
         read();
 

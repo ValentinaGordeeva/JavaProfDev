@@ -23,8 +23,6 @@ public class ServiceSendingMes {
 
     @Autowired         //  раскоментировать для 5 пр.р.
     RestTemplate restTemplate;
-    @Autowired
-    JpaApplication jpaApplication;
 
  /*
 
@@ -48,7 +46,7 @@ public class ServiceSendingMes {
         //для отправки запроса
         HttpEntity<Coordinates> requestEntity = new HttpEntity<>(coordinates, headers);
         restTemplate.postForObject(url, requestEntity, String.class);
-        jpaApplication.setCoordinates(coordinates.toString());
+
     }
 
 }
